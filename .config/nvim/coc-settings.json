@@ -1,0 +1,23 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "python", "css", "javascript", "typescript", "golang", "c", "cpp", "cc"],
+  "rust.build_on_save": true,
+  "rust.wait_to_build": 2000,
+  "python.formatting.blackArgs": ["--line-length", "79"],
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "go.goplsOptions": {
+    "completeUnimported": true
+  },
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  }
+}
