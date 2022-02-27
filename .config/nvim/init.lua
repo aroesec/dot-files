@@ -3,6 +3,7 @@ vim.cmd([[
   let &packpath = &runtimepath
   source ~/.vimrc
 ]])
+vim.cmd[[colorscheme catppuccin]]
 
 function gitsigns_status_formatter(status)
   local head, added, changed, removed = status.head, status.added, status.changed, status.removed
