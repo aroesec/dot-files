@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'github/copilot.vim'
@@ -14,13 +14,32 @@ Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'yaegassy/coc-volar', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'posva/vim-vue'
 
-Plug 'itchyny/lightline.vim'
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
-
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 call plug#end()
 
+:set autochdir
 set number
 set smartindent
 set mouse=a
@@ -31,7 +50,7 @@ set expandtab
 set ruler
 syntax on
 filetype plugin indent on
-
+let g:lightline = {'colorscheme': 'catppuccin'}
 let g:coc_global_extensions = [ 'coc-tsserver' ]
 nmap <leader>qf <Plug>(coc-fix-current)
 nmap <leader>ac <Plug>(coc-codeaction)
@@ -75,7 +94,6 @@ function GetClock()
 endfunction
 
 set termguicolors
-colorscheme gruvbox
 
 
 set noshowmode
