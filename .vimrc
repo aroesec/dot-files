@@ -5,40 +5,19 @@ Plug 'junegunn/fzf.vim'
 Plug 'github/copilot.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
-
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-eslint' 
 Plug 'yaegassy/coc-volar', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'posva/vim-vue'
-
-
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
 call plug#end()
-
+let g:prettier#autoformat = 0
+set clipboard=unnamedplus
 :set autochdir
 set number
 set smartindent
@@ -51,7 +30,7 @@ set ruler
 syntax on
 filetype plugin indent on
 let g:lightline = {'colorscheme': 'catppuccin'}
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+let g:coc_global_extensions = [ 'coc-eslint','coc-tsserver', 'coc-prettier' ]
 nmap <leader>qf <Plug>(coc-fix-current)
 nmap <leader>ac <Plug>(coc-codeaction)
 nmap <silent>gd <Plug>(coc-definition)
