@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'github/copilot.vim'
@@ -29,7 +29,7 @@ set expandtab
 set ruler
 syntax on
 filetype plugin indent on
-let g:lightline = {'colorscheme': 'catppuccin'}
+let g:lightline = {'colorscheme': 'gruvbox'}
 let g:coc_global_extensions = [ 'coc-eslint','coc-tsserver', 'coc-prettier' ]
 nmap <leader>qf <Plug>(coc-fix-current)
 nmap <leader>ac <Plug>(coc-codeaction)
@@ -38,6 +38,7 @@ nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(cocimplementation)
 nmap <silent>gr <Plug>(coc-references)
 nmap <F2> <Plug>(coc-rename)
+
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -79,6 +80,7 @@ set noshowmode
 hi CocFloating guibg=#232530
 hi Statement gui=NONE
 
+
 "let s:palette = g:lightline#colorscheme#horizon#palette
 "let s:palette.tabline.left = [['#6c6f93', '#1c1e26', 242, 233]]
 "let s:palette.tabline.tabsel = [['#09f7a0', '2e303e', 209, 235, 'bold']]
@@ -98,3 +100,4 @@ let g:context#commentstring#table['vue']['vue_typescript'] = '// %s'
 " Use <Tab> and <S-Tab> to navigate the completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>",
+
