@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'github/copilot.vim'
@@ -29,7 +29,7 @@ set expandtab
 set ruler
 syntax on
 filetype plugin indent on
-let g:lightline = {'colorscheme': 'gruvbox'}
+let g:lightline = {'colorscheme': 'tokio'}
 let g:coc_global_extensions = [ 'coc-eslint','coc-tsserver', 'coc-prettier' ]
 nmap <leader>qf <Plug>(coc-fix-current)
 nmap <leader>ac <Plug>(coc-codeaction)
