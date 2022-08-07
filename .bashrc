@@ -1,103 +1,103 @@
-call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'github/copilot.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'suy/vim-context-commentstring'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'neoclide/coc-eslint' 
-Plug 'yaegassy/coc-volar', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'posva/vim-vue'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
-call plug#end()
-let g:prettier#autoformat = 0
-set clipboard=unnamedplus
-:set autochdir
-set number
-set smartindent
-set mouse=a
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
-set ruler
-syntax on
-filetype plugin indent on
-let g:lightline = {'colorscheme': 'gruvbox'}
-let g:coc_global_extensions = [ 'coc-eslint','coc-tsserver', 'coc-prettier' ]
-nmap <leader>qf <Plug>(coc-fix-current)
-nmap <leader>ac <Plug>(coc-codeaction)
-nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>gy <Plug>(coc-type-definition)
-nmap <silent>gi <Plug>(cocimplementation)
-nmap <silent>gr <Plug>(coc-references)
-nmap <F2> <Plug>(coc-rename)
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
-nmap <silent>fo :Files<CR>
-nmap <silent>ff :Rg<CR>
-nmap <silent>fb :Buffers<CR>
-nmap <silent>ts :tab split<CR>
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor\,sm:block-blinkwait175-blinkoff150-blinkon175
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
-" https://github.com/neoclide/coc.nvim/issues/869#issuecomment-501323697
-nnoremap <silent>K :call <SID>show_documentation()<CR>
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
-autocmd CursorHold * silent call CocActionAsync('highlight') 
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
-function! SyntaxItem()
-  return synIDattr(synID(line("."),col(".")1),"name")
-endfunction
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-function GetClock()
-  return strftime('%H:%M')
-endfunction
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-set termguicolors
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-set noshowmode
-hi CocFloating guibg=#232530
-hi Statement gui=NONE
-
-
-"let s:palette = g:lightline#colorscheme#horizon#palette
-"let s:palette.tabline.left = [['#6c6f93', '#1c1e26', 242, 233]]
-"let s:palette.tabline.tabsel = [['#09f7a0', '2e303e', 209, 235, 'bold']]
-
-" call timer_start(1000, {->execute('redrawstatus')}, {'repeat': -1})
-
-" Go to last active tab
-
-au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent>gb :exe "tabn ".g:lasttab<cr>
-vnoremap <silent>gb :exe "tabn ".g:lasttab<cr>
-
-" force load of context/commentstring.vim and set vue_typescript
-:runtime autoload/context/commentstring.vim
-let g:context#commentstring#table['vue']['vue_typescript'] = '// %s'
-
-" Use <Tab> and <S-Tab> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>",
-
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
