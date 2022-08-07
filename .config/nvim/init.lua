@@ -3,7 +3,8 @@ vim.cmd([[
   let &packpath = &runtimepath
   source ~/.vimrc
 ]])
-vim.cmd[[colorscheme gruvbox]]
+vim.g.tokyonight_transparent = true
+vim.cmd[[colorscheme tokyonight]]
 
 function gitsigns_status_formatter(status)
   local head, added, changed, removed = status.head, status.added, status.changed, status.removed
@@ -17,3 +18,4 @@ require'gitsigns'.setup({
   current_line_blame = true,
   status_formatter = gitsigns_status_formatter
 })
+
