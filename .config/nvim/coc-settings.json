@@ -5,18 +5,17 @@
     "css",
     "javascript",
     "typescript",
+    "typescriptreact",
+    "javascriptreact",
     "golang",
     "c",
     "cpp",
     "cc"
   ],
-  "python.formatting.blackArgs": ["--line-length", "90"],
-  "python.linting.flake8Args": ["--config $HOME/.config/flake8"],
-  "pyright.organizeimports.provider": "isort",
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true,
-  "python.formatting.provider": "black",
+
+  
+ 
+
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -26,4 +25,5 @@
         "usePlaceholders": true
       }
     }
-  }
+  
+  }}
