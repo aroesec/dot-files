@@ -2,11 +2,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'github/copilot.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
+Plug 'peitalin/vim-jsx-typescript'
+
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-eslint' 
@@ -29,6 +31,7 @@ set expandtab
 set ruler
 syntax on
 filetype plugin indent on
+
 let g:lightline = {'colorscheme': 'tokio'}
 let g:coc_global_extensions = [ 'coc-eslint','coc-tsserver', 'coc-prettier' ]
 nmap <leader>qf <Plug>(coc-fix-current)
@@ -100,4 +103,6 @@ let g:context#commentstring#table['vue']['vue_typescript'] = '// %s'
 " Use <Tab> and <S-Tab> to navigate the completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>",
+
+inoremap <silent><expr> <TAB> pumvisible() ? coc#select_confirm() : "\<C-g>u\<TAB>"
 
